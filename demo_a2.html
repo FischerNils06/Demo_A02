@@ -1,0 +1,44 @@
+<h1>Demo zu Aufgabe 2</h1>
+<div>
+    <input id="input" type="text">
+    <button>Senden</button>
+    <button id="onoff">On</button>
+
+</div>
+
+<div>
+    <h3>Du hast gesucht nach:</h3>
+    <p id="h3"></p>
+    <script>
+        const input = document.getElementById('input');
+        const button = document.querySelector('button');
+        const output = document.getElementById('h3');
+        const onoff = document.getElementById('onoff');
+
+        button.addEventListener('click', () => {
+            if (onoff.innerHTML === 'On') {
+                input.value = cleanStr(input.value);
+            }
+            output.innerHTML = input.value;
+            
+        });
+
+        
+        onoff.addEventListener('click', () => {
+            if (onoff.innerHTML === 'On') {
+                onoff.innerHTML = 'Off';
+            } else {
+                onoff.innerHTML = 'On';
+            }
+        });
+
+
+        function cleanStr (str) {
+            return str.replaceAll(">","&gt;").replaceAll("<","&lt;");
+        }
+
+
+        
+    </script>
+
+</div>
