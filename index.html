@@ -1,9 +1,15 @@
-<h1>Demo zu Aufgabe 2</h1>
+<h1>Aufgabe 2 - Abwehr von XSS</h1>
 <div>
-    <input id="input" type="text">
-    <button>Senden</button>
-    <button id="onoff">On</button>
+    <p>Die Function muss <span style="font-weight: bolder; color:blue">cleanStr</span> heissen und den parameter <span style="font-weight: bolder; color: blue;">str</span> annehmen</p>
+    <textarea id="function" spellcheck="false" style="display: block; margin-bottom: 2%; height: 10%; width: 50%;" ></textarea>
+    <p><button id="onoff">On</button>       Dieser Button stellt die Function ein und aus</p>
+    
 
+    <p style="margin-top: 5%; font-weight: bolder;">Hier kommt der Suchbegriff</p>
+    <input id="input" type="text">
+    <button id="submit">Senden</button>
+    
+    
 </div>
 
 <div>
@@ -11,11 +17,20 @@
     <p id="h3"></p>
     <script>
         const input = document.getElementById('input');
-        const button = document.querySelector('button');
+        const button = document.getElementById('submit');
         const output = document.getElementById('h3');
         const onoff = document.getElementById('onoff');
+        const functionInput = document.getElementById('function');
 
         button.addEventListener('click', () => {
+            let func = functionInput.value;
+            console.log(func);
+            eval(func);
+            console.log(func);
+            let result = cleanStr(input.value);
+            
+            
+
             if (onoff.innerHTML === 'On') {
                 input.value = cleanStr(input.value);
             }
@@ -31,11 +46,14 @@
                 onoff.innerHTML = 'On';
             }
         });
+        
 
 
-        function cleanStr (str) {
-            return str.replaceAll(">","&gt;").replaceAll("<","&lt;");
-        }
+
+
+
+
+        
 
 
         
