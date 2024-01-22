@@ -1,9 +1,9 @@
 <h1>Aufgabe 2 - Abwehr von XSS</h1>
 <div>
-    <p>Die Function muss <span style="font-weight: bolder; color:blue">cleanStr</span> heissen und den parameter <span style="font-weight: bolder; color: blue;">str</span> annehmen</p>
+    <p>Die Function muss <span style="font-weight: bolder; color:blue">cleanStr</span> heissen und <span style="font-weight: bolder; color: blue;">genau einen</span> Parameter annehmen</p>
     <textarea id="function" spellcheck="false" style="display: block; margin-bottom: 2%; height: 10%; width: 50%;" ></textarea>
     <p><button id="onoff">On</button>       Dieser Button stellt die Function ein und aus</p>
-    
+    <p id="err" style="color: red; font-weight: bold;"></p>
 
     <p style="margin-top: 5%; font-weight: bolder;">Hier kommt der Suchbegriff</p>
     <input id="input" type="text">
@@ -21,20 +21,34 @@
         const output = document.getElementById('h3');
         const onoff = document.getElementById('onoff');
         const functionInput = document.getElementById('function');
+        const err = document.getElementById('err');
 
         button.addEventListener('click', () => {
-            let func = functionInput.value;
-            console.log(func);
-            eval(func);
-            console.log(func);
-            let result = cleanStr(input.value);
             
             
 
             if (onoff.innerHTML === 'On') {
-                input.value = cleanStr(input.value);
+                let func = functionInput.value;
+                if (func === '') {
+                    output.innerHTML = input.value;
+                    err.innerHTML = 'Error: Function is empty';
+                } else {
+                    try {
+                        eval(func);
+                        let result = cleanStr(input.value);
+                        err.innerHTML = '';
+                        output.innerHTML = cleanStr(input.value);
+                    } catch (error) {
+                        output.innerHTML = input.value;
+                        err.innerHTML = 'Error: ' + error;
+                    }
+                }
+                
+            } else {
+                err.innerHTML = '';
+                output.innerHTML = input.value;
             }
-            output.innerHTML = input.value;
+            
             
         });
 
@@ -48,15 +62,6 @@
         });
         
 
-
-
-
-
-
-        
-
-
-        
     </script>
 
 </div>
